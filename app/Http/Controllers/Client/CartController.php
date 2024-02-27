@@ -13,7 +13,10 @@ class CartController extends Controller {
         $items = [];
         foreach ($cart as $productId => $quantity) {
             $product = Product::with('images')->find($productId);
-            $items[$quantity] = $product;
+            array_push($items, [
+                'product' => $product,
+                'quantity' => $quantity
+            ]);
         }
         // dd($items);
         return view('client.cart.cart')->with([
@@ -42,5 +45,24 @@ class CartController extends Controller {
         ]);
     }
 
+    public function remove($productId) {
+         // Lấy thông tin giỏ hàng từ session
+        $cart = Session::get('cart', []);
 
+        // Kiểm tra xem sản phẩm có tồn tại trong giỏ hàng không
+        if (array_key_exists($productId, $cart)) {
+            // Nếu tồn tại, xóa sản phẩm khỏi giỏ hàng
+            unset($cart[$productId]);
+
+            // Cập nhật thông tin giỏ hàng mới vào session
+            Session::put('cart', $cart);
+
+            return redirect()->back()->with([
+                'message' => 'xóa thành công'
+            ]);
+        } else {
+            // Nếu không tồn tại, có thể thực hiện xử lý khác (ví dụ: thông báo lỗi)
+            return redirect()->route('cart.index')->with('error', 'Sản phẩm không tồn tại trong giỏ hàng');
+        }
+    }
 }

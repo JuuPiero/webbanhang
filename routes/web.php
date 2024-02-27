@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Client\CartController;
+use App\Http\Controllers\Client\CheckoutController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\UserController;
 use Illuminate\Support\Facades\Route;
@@ -21,10 +22,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/cart', [CartController::class, 'index'])->name('cart');
-Route::get('/cart/add/{productId}', [CartController::class, 'add'])->name('cart.add');
 
 
+Route::middleware('auth')->group(function() {
+    Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout.show');
+    // Route::post('checkout', [CheckoutController::class, 'checkout'])->name('checkout.post');
+});
+Route::prefix('cart')->group(function() {
+    Route::get('', [CartController::class, 'index'])->name('cart');
+    Route::get('add/{productId}', [CartController::class, 'add'])->name('cart.add');
+    Route::get('remove/{productId}', [CartController::class, 'remove'])->name('cart.remove');
+});
 
 Route::prefix('user')->group(function() {
     Route::get('login', [UserController::class, 'login'])->name('user.login');
