@@ -12,7 +12,7 @@ class ProductController extends Controller
 {
     public function index() {
         $products = Product::with('images')->join('categories', 'categories.id', '=', 'products.category_id')->select('products.*', 'categories.name as category_name')->get();
-        // dd($products[0]->images[0]);
+        
         return view('admin.product.index', compact('products'));
     }
 

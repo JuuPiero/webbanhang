@@ -6,9 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller {
     public function index() {
+        // Session::put('cart', []);
+
         // $categories = Category::Where('is_active', 1)->get();
         $categories = Category::with('products')
         ->get();

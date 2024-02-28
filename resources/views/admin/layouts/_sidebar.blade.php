@@ -36,8 +36,8 @@
                 <i class="icon-windows"></i> Orders 
             </a>
             <ul id="orderDropdown" class="collapse list-unstyled ">
-                <li><a href="{{ route('admin.product') }}">List all</a></li>
-                <li><a href="{{ route('admin.product.create') }}">Add new</a></li>
+                <li><a href="{{ route('admin.order') }}">List all</a></li>
+                {{-- <li><a href="{{ route('admin.order.create') }}">Add new</a></li> --}}
             </ul>
         </li>
     </ul>

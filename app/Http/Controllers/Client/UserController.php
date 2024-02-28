@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller {
 
@@ -33,6 +34,15 @@ class UserController extends Controller {
         return view('client.user.register');
     }
     public function postRegister(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|string|email|max:255|unique:users',
+            'phone_number' => 'required|string|unique:users',
+
+            // 'password' => 'required|string|min:8|confirmed',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
         $data = $request->all();
         $data['password'] = Hash::make($data['password']);

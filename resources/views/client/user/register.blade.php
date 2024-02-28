@@ -3,6 +3,14 @@
 @section('content')
       <!-- Sign in / Register Modal -->
       <div class="form-box">
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                <div class="alert alert-warn" style="color: red">
+                    {{ $error }}
+                </div>        
+            @endforeach
+        @endif
+
         <div class="form-tab">
             <ul class="nav nav-pills nav-fill" role="tablist">
                 <li class="nav-item">
@@ -21,6 +29,10 @@
                         <div class="form-group">
                             <label >Last Name</label>
                             <input type="text" class="form-control" name="last_name" required>
+                        </div>
+                        <div class="form-group">
+                            <label >Phone Number</label>
+                            <input type="text" class="form-control" name="phone_number" required>
                         </div>
                         <div class="form-group">
                             <label for="singin-email">Email address *</label>

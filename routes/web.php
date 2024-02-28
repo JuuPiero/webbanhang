@@ -25,8 +25,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
 Route::middleware('auth')->group(function() {
-    Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout.show');
-    // Route::post('checkout', [CheckoutController::class, 'checkout'])->name('checkout.post');
+    Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout');
+    Route::post('checkout', [CheckoutController::class, 'checkout'])->name('checkout.post');
 });
 Route::prefix('cart')->group(function() {
     Route::get('', [CartController::class, 'index'])->name('cart');
@@ -69,7 +69,7 @@ Route::prefix('admin')->group(function () {
             Route::get('delete/{id}', [CategoryController::class, 'delete'])->name('admin.category.delete');
         });
 
-        Route::prefix('order')->group(function() {
+        Route::prefix('orders')->group(function() {
             Route::get('', [OrderController::class, 'index'])->name('admin.order');
             // Route::get('create', [CategoryController::class, 'create'])->name('admin.category.create');
             // Route::post('store', [CategoryController::class, 'store'])->name('admin.category.store');
