@@ -3,13 +3,27 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\User;
+use GuzzleHttp\Handler\Proxy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller {
 
     public function index() {
-        return view('admin.index');
+        $users = User::all();
+        $products = Product::all();
+        $categories = Category::all();
+        $orders = Order::where('status', 0)->get();
+        return view('admin.index')->with([
+            'users' => $users,
+            'products' => $products,
+            'categories' => $categories,
+            'orders' => $orders
+        ]);
     }
 
     public function login() {

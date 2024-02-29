@@ -36,7 +36,6 @@ class ProductController extends Controller
             foreach ($images as $index => $image) {
                 $fileName = $product->id . '_' . $index . '_' . time() . '.' . $image->getClientOriginalExtension();
                 $image->move(public_path('uploads'), $fileName);
-                // $image->storeAs('uploads', $fileName, 'public');
                 ProductImage::create([
                     'product_id' => $product->id,
                     'name' => $fileName
