@@ -53,7 +53,6 @@ Route::prefix('admin')->group(function () {
         Route::get('', [AdminController::class, 'index'])->name('admin');
         Route::get('logout', [AdminController::class, 'logout'])->name('admin.logout');
 
-
         Route::prefix('products')->group(function() {
             Route::get('', [ProductController::class, 'index'])->name('admin.product');
             Route::get('create', [ProductController::class, 'create'])->name('admin.product.create');
