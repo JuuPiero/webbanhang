@@ -18,7 +18,6 @@
             <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
                 <li><a href="{{ route('admin.category') }}">List all</a></li>
                 <li><a href="{{ route('admin.category.create') }}">Add new</a></li>
-                <li><a href="#">Page</a></li>
             </ul>
         </li>
         <li>
