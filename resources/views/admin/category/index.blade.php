@@ -45,11 +45,5 @@
 @endsection
 
 @section('scripts')
-<script>
-function deleteRow() {
-  
-}
 
-
-</script>
 @endsection

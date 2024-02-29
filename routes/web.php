@@ -57,7 +57,9 @@ Route::prefix('admin')->group(function () {
     Route::prefix('/')->middleware('admin.auth')->group(function() {
         Route::get('', [AdminController::class, 'index'])->name('admin');
         Route::get('logout', [AdminController::class, 'logout'])->name('admin.logout');
+        Route::get('users', [AdminController::class, 'user'])->name('admin.user');
 
+        
         Route::prefix('products')->group(function() {
             Route::get('', [ProductController::class, 'index'])->name('admin.product');
             Route::get('create', [ProductController::class, 'create'])->name('admin.product.create');

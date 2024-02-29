@@ -47,4 +47,11 @@ class AdminController extends Controller {
         Auth::guard('admin')->logout();
         return redirect(route('admin.login'));
     }
+
+    public function user() {
+        $users = User::with('orders')->get();
+        return view('admin.user.index')->with([
+            'users' =>$users
+        ]);
+    }
 }
