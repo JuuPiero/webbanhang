@@ -27,6 +27,33 @@ class HomeController extends Controller {
     }
 
     public function category($id) {
-        return view('client.home.category');
+        $category = Category::where('id', $id)
+        ->where('is_active', 1)
+        ->firstOrFail();
+
+        $products = Product::with('images')
+        ->where('category_id', $id)
+        ->where('is_active', 1)
+        ->paginate(9);
+
+        return view('client.home.category')->with([
+            'category' => $category,
+            'products' => $products
+        ]);
+    }
+
+    public function product($id) {
+        $product = Product::with('images')->with('category')
+        ->where('id', $id)
+        ->where('is_active', 1)->firstOrFail();
+        $suggests = Product::with('images')->with('category')
+        ->where('is_active', 1)
+        ->where('category_id', $product->category_id)
+        ->where('id', '<>' ,$id)->get();
+        return view('client.home.product')->with([
+            'product' => $product,
+            'suggests' => $suggests
+
+        ]);
     }
 }

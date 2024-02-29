@@ -12,4 +12,5 @@
   <!-- Main JS File -->
   <script src="{{ asset('assets/client/js/main.js') }}"></script>
   <script src="{{ asset('assets/client/js/demos/demo-3.js') }}"></script>
+  <script src="{{ asset('assets/client/js/jquery.elevateZoom.min.js') }}"></script>
   @yield('scripts')

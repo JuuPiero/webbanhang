@@ -27,15 +27,17 @@
 
                   <td>{{ $order->phone_number }}</td>
                   <td>{{ $order->total_amount }}</td>
-                  <td ><input type="submit" readonly class="btn btn-primary text-black" value="{{ $order->status == 0 ? 'Pending' : 'Complete'}}"></td>
+                  <td><span style="background-color: {{ $order->status == 0 ? 'red' : 'green'}}; color: black" >{{ $order->status == 0 ? 'Pending' : 'Complete'}}</span></td>
+                  {{-- <td ><input type="submit" style="" readonly class="btn {{ $order->status == 0 ? 'Pending' : 'Complete'}} text-black" value="{{ $order->status == 0 ? 'Pending' : 'Complete'}}"></td> --}}
                   <td>
-                    <a href="#" class="btn btn-primary text-black">Detail</a>
+                    <a href="{{ route('admin.order.detail', $order->id) }}" class="btn btn-primary text-black">Detail</a>
                   </td>
                 </tr>
               @endforeach
             </tbody>
           </table>
         </div>
+     
     </div>
 </div>
 

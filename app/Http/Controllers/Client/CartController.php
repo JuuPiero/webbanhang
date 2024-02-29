@@ -26,6 +26,7 @@ class CartController extends Controller {
     }
 
     public function add($productId, $quantity = 1) {
+        
         if (!Session::has('cart')) {
             Session::put('cart', []);
         }

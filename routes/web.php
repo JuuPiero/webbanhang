@@ -21,8 +21,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
 
+Route::prefix('/')->group(function() {
+    Route::get('', [HomeController::class, 'index'])->name('home');
+    Route::get('category/{id}', [HomeController::class, 'category'])->name('home.category');
+    Route::get('product/{id}', [HomeController::class, 'product'])->name('home.product.detail');
+
+});
 
 Route::middleware('auth')->group(function() {
     Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout');
@@ -30,7 +35,7 @@ Route::middleware('auth')->group(function() {
 });
 Route::prefix('cart')->group(function() {
     Route::get('', [CartController::class, 'index'])->name('cart');
-    Route::get('add/{productId}', [CartController::class, 'add'])->name('cart.add');
+    Route::get('add/{productId}/{quantity?}', [CartController::class, 'add'])->name('cart.add');
     Route::get('remove/{productId}', [CartController::class, 'remove'])->name('cart.remove');
 });
 
@@ -58,6 +63,9 @@ Route::prefix('admin')->group(function () {
             Route::get('create', [ProductController::class, 'create'])->name('admin.product.create');
             Route::post('store', [ProductController::class, 'store'])->name('admin.product.store');
 
+            Route::get('edit/{id}', [ProductController::class, 'edit'])->name('admin.product.edit');
+            Route::post('update/{id}', [ProductController::class, 'update'])->name('admin.product.update');
+
             Route::get('delete/{id}', [ProductController::class, 'delete'])->name('admin.product.delete');
         });
 
@@ -65,11 +73,18 @@ Route::prefix('admin')->group(function () {
             Route::get('', [CategoryController::class, 'index'])->name('admin.category');
             Route::get('create', [CategoryController::class, 'create'])->name('admin.category.create');
             Route::post('store', [CategoryController::class, 'store'])->name('admin.category.store');
+            Route::get('edit/{id}', [CategoryController::class, 'edit'])->name('admin.category.edit');
+            Route::post('update/{id}', [CategoryController::class, 'update'])->name('admin.category.update');
+
             Route::get('delete/{id}', [CategoryController::class, 'delete'])->name('admin.category.delete');
         });
 
         Route::prefix('orders')->group(function() {
             Route::get('', [OrderController::class, 'index'])->name('admin.order');
+            Route::get('detail/{id}', [OrderController::class, 'detail'])->name('admin.order.detail');
+            Route::post('handle/{id}', [OrderController::class, 'handle'])->name('admin.order.handle');
+
+            
             // Route::get('create', [CategoryController::class, 'create'])->name('admin.category.create');
             // Route::post('store', [CategoryController::class, 'store'])->name('admin.category.store');
             // Route::get('delete/{id}', [CategoryController::class, 'delete'])->name('admin.category.delete');

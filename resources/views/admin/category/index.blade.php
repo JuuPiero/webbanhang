@@ -30,7 +30,7 @@
                     <td><img style="width: 80px; height: 40px; object-fit: cover" src="{{ asset('uploads/' . $category->image) }}" alt="" srcset=""></td>
                     <td>{{ $category->is_active ? 'true' : 'false'}}</td>
                     <td>
-                        <a href="#" class="btn btn-primary text-black">Edit</a>
+                        <a href="{{ route('admin.category.edit', $category->id) }}" class="btn btn-primary text-black">Edit</a>
                         <a href="{{ route('admin.category.delete', $category->id) }}" class="btn btn-secondary text-black">Delete</a>
                     </td>
                   </tr>

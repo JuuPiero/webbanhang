@@ -26,4 +26,9 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function order_item()
+    {
+        return $this->hasOne(OrderItem::class);
+    }
 }

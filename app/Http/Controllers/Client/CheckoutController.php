@@ -47,7 +47,8 @@ class CheckoutController extends Controller {
                 'price' => $quantity * $product->price
             ]);            
         }
-
+        //đặt xong thì xóa giỏ
+        Session::put('cart', []);
         return redirect(route('home'))->with([
             'message' => 'đặt hàng thành công'
         ]);

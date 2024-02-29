@@ -29,7 +29,7 @@
                   <td>{{ $product->price}}</td>
                   <td>{{ $product->is_active ? 'true' : 'false'}}</td>
                   <td>
-                    <a href="#" class="btn btn-primary text-black">Edit</a>
+                    <a href="{{ route('admin.product.edit', $product->id) }}" class="btn btn-primary text-black">Edit</a>
                     <a href="{{ route('admin.product.delete', $product->id) }}" class="btn btn-secondary text-black">Delete</a>
                   </td>
                 </tr>

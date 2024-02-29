@@ -228,7 +228,7 @@
                     @foreach ($products as $product)
                         <div class="product product-2">
                             <figure class="product-media">
-                                <a href="product.html">
+                                <a href="{{ route('home.product.detail', $product->id) }}">
                                     <img src="{{ asset('uploads/' . $product->images[0]->name) }}" alt="Product image" class="product-image">
                                 </a>
                                 <div class="product-action product-action-dark">
@@ -268,6 +268,4 @@
     alert('{{ session('message') }}')
 </script>     
 @endif
-
-
 @endsection
