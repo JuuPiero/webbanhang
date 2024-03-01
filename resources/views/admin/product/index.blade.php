@@ -30,7 +30,7 @@
                   <td>{{ $product->is_active ? 'true' : 'false'}}</td>
                   <td>
                     <a href="{{ route('admin.product.edit', $product->id) }}" class="btn btn-primary text-black">Edit</a>
-                    <a href="{{ route('admin.product.delete', $product->id) }}" class="btn btn-secondary text-black">Delete</a>
+                    <a href="{{ route('admin.product.delete', $product->id) }}" class="btn btn-secondary text-black delete-btn">Delete</a>
                   </td>
                 </tr>
               @endforeach
@@ -41,4 +41,17 @@
 </div>
 
     
+@endsection
+
+@section('scripts')
+<script>
+  $('.delete-btn').click(e => {
+    if(confirm("Bạn có chắc muốn xóa ?")) {
+      return true
+    }
+    else {
+      e.preventDefault()
+    }
+  })
+</script>
 @endsection

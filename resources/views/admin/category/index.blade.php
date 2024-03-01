@@ -31,7 +31,7 @@
                     <td>{{ $category->is_active ? 'true' : 'false'}}</td>
                     <td>
                         <a href="{{ route('admin.category.edit', $category->id) }}" class="btn btn-primary text-black">Edit</a>
-                        <a href="{{ route('admin.category.delete', $category->id) }}" class="btn btn-secondary text-black">Delete</a>
+                        <a href="{{ route('admin.category.delete', $category->id) }}" class="btn btn-secondary delete-btn text-black">Delete</a>
                     </td>
                   </tr>
                 @endforeach
@@ -45,5 +45,15 @@
 @endsection
 
 @section('scripts')
+<script>
+  $('.delete-btn').click(e => {
+    if(confirm("Bạn có chắc muốn xóa ?")) {
+      return true
+    }
+    else {
+      e.preventDefault()
+    }
+  })
+</script>
 
 @endsection
